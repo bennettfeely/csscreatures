@@ -160,6 +160,10 @@ header {
 		margin-bottom: 0;
 	}
 
+	footer & {
+		font-size: 1em;
+	}
+
 	.showing-directions header & {
 		border-radius: $radius $radius 0 0;
 		box-shadow: none;
@@ -285,12 +289,14 @@ header {
 	.more-highlight { animation-delay: $highlight-duration * .75; }
 }
 
+
 .twitter-logo {
-	position: absolute;
 	width: 1.5em;
 	height: 1.5em;
-	left: .125em;
+	vertical-align: middle;
+	position: absolute;
 	top: .125em;
+	left: .125em;
 
 	path {
 		fill: $blue_twitter;
@@ -761,4 +767,51 @@ header {
 // Footer ============================================================================
 	footer {
 		padding: 0 1em;
+	}
+
+
+// Share =============================================================================
+.share {
+	display: inline-block;
+	font-size: 1em;
+	margin-left: .5em;
+}
+
+
+.share-button {
+		@extend %no-select;
+		@extend %no-drag;
+		display: inline-block;
+		border-radius: $radius;
+		text-decoration: none;
+		box-shadow: $shadow;
+		color: $white;
+		padding: 1rem .7em;
+		background: $blue;
+		border: 0;
+		box-shadow: inset .15em -.15em $shadow;
+		transition:
+			background $transition,
+			color $transition;
+	}
+
+	.share-button {
+		position: relative;
+		cursor: pointer;
+		margin-right: .25em;
+		padding-left: 2em;
+
+		.twitter-logo {
+			top: .525em;
+			left: .5em;
+
+			path {
+				fill: $blue_twitter;
+			}
+		}
+
+		&:hover {
+			color: white;
+			border: 0;
+		}
 	}
