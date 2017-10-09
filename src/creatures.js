@@ -1,3 +1,4 @@
+// Advertisment ======================================================================
 var carbon_ad = '<div class="item ad-box"><div class="carbon-ad" id="carbonads"><span><span class="carbon-wrap"><a href="//srv.carbonads.net/ads/click/x/GTND42QECWSD6KQJCVS4YKQMCTBIP2QWCVBITZ3JCWYDP27ICKBI55QKC6BIT2QNCVYDEK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:bennettfeelycom;&amp;encredirect=https%3A%2F%2Fslack.com%2Flp%3Fcvosrc%3Ddisplay.carbon.plain%20dev%26utm_source%3Dcarbon%26utm_medium%3Ddisplay%26utm_campaign%3Dplain%20dev%26c3ch%3DCarbon%20Networks%26c3nid%3DPlain%20Dev" class="carbon-img" target="_blank" rel="noopener"><img src="https://assets.servedby-buysellads.com/p/manage/asset/id/32052" alt="" border="0" height="100" width="130" style="max-width: 130px;"></a><a href="//srv.carbonads.net/ads/click/x/GTND42QECWSD6KQJCVS4YKQMCTBIP2QWCVBITZ3JCWYDP27ICKBI55QKC6BIT2QNCVYDEK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:bennettfeelycom;&amp;encredirect=https%3A%2F%2Fslack.com%2Flp%3Fcvosrc%3Ddisplay.carbon.plain%20dev%26utm_source%3Dcarbon%26utm_medium%3Ddisplay%26utm_campaign%3Dplain%20dev%26c3ch%3DCarbon%20Networks%26c3nid%3DPlain%20Dev" class="carbon-text" target="_blank" rel="noopener">All the tools your team needs in one place. Slack: Where work happens.</a></span><a href="http://carbonads.net/?utm_source=bennettfeelycom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank">ads via Carbon</a><img src="https://slack.sp1.convertro.com/view/vt/v1/slack/0/cvo.gif?cvosrc=display.carbon.plain dev&amp;utm_source=carbon&amp;utm_medium=display&amp;utm_campaign=plain dev" border="0" height="1" width="1" style="display: none;"><img src="https://569-img.c3tag.com/v.gif?cid=569&amp;c3ch=Carbon Networks&amp;c3nid=Plain Dev" border="0" height="1" width="1" style="display: none;"></span></div></div></div>';
 
 
@@ -251,23 +252,23 @@ function buildCreature(tweet, i) {
 	var eye = '<div class="eye" style="' + randomAnimationTiming(5) + '"></div>'
 	var eyes = '<div class="eyes">' + eye + eye + '</div>';
 
-	if (mod_set.includes('mod-cyclops')) {
+	if (mod_set.indexOf('mod-cyclops') > -1) {
 		var eyes = '<div class="eyes">' + eye + '</div>';
 	}
 
 	// Moustache
 	var moustache = '';
-	if (mod_set.includes('mod-moustache')) {
+	if (mod_set.indexOf('mod-moustache') > -1) {
 		var moustache = '<svg class="moustache" xmlns="http://www.w3.org/2000/svg" viewBox="83 299 443 121" preserveAspectRatio="none" width="220" height="60"><path d="M407 338C402 336 398 332 395 330 382 318 364 300 338 300 325 300 313 305 305 313 296 305 284 300 271 300 245 300 227 318 215 330 211 332 207 336 202 338 126 377 84 345 84 345 151 462 265 411 295 390 299 388 302 386 305 383 307 386 311 388 314 390 344 411 459 462 526 345Z" fill="#3F1F13"/></svg>';
 	}
 
 	// Mouth
 	var tooth = '<div class="tooth"></div>';
 	var mouth = '<div class="mouth"></div>';
-	if (mod_set.includes('mod-tooth')) {
+	if (mod_set.indexOf('mod-tooth') > -1) {
 		var mouth = '<div class="mouth">' + tooth + '</div>';
 	}
-	if (mod_set.includes('mod-teeth') || mod_set.includes('mod-jack-o-lantern')) {
+	if (mod_set.indexOf('mod-teeth') > -1 || mod_set.indexOf('mod-jack-o-lantern') > -1) {
 		var mouth = '<div class="mouth">' + tooth + tooth + '</div>';
 	}
 
