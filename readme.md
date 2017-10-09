@@ -1,6 +1,6 @@
 # CSS Creatures
 
-![Screenshot of CSS Creatures](https://bennettfeely.com/csscreatures/img/screenshot.png)
+![Screenshot of CSS Creatures](https://bennettfeely.com/csscreatures/img/screenshot-2.png)
 
 This is a new version of CSS Creatures, which was originally released in December 2012.
 
