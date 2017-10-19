@@ -54,7 +54,14 @@ function getColor(string) {
 	// Break this
 	// return '';
 
-	return 'background-color: ' + color + '; ';
+	console.log(color);
+
+	if (color == undefined) {
+		console.log('undefined!! ^^ ')
+		return '';
+	} else {
+		return 'background-color: ' + color + '; ';
+	}
 }
 
 

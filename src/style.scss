@@ -402,10 +402,10 @@ header {
 	box-shadow: inset .3rem -.5rem $shadow;
 	transition: box-shadow $transition;
 
-	$colors_list: #f44336, #d8a635, #5aa959, #3cb9b9, #5a31bb, #785cbb;
+	$colors_list: #f44336, #d8a635, #5aa959, #3cb9b9, #5a31bb, #785cbb, #f44336, #d8a635, #5aa959, #3cb9b9;
 
 	@for $i from 1 through length($colors_list) {
-		.creature-box:nth-child(#{$i}) & {
+		.creature-box:nth-last-child(#{$i}) & {
 			background-color: nth($colors_list, $i);
 		}
 	}
