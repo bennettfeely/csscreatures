@@ -366,6 +366,15 @@ header {
 			display: none;
 		}
 	}
+
+	&.ad-box,
+	&.default-box {
+		display: inline-block !important;
+	}
+
+	&.is-hidden {
+		display: none !important;
+	}
 }
 
 .default-box {

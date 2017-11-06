@@ -1,6 +1,5 @@
 // Advertisment ======================================================================
 // var carbon_ad = '<div class="carbon-ad" id="carbonads"><span><span class="carbon-wrap"><a href="//srv.carbonads.net/ads/click/x/GTND42QECWSD6KQJCVS4YKQMCTBIP2QWCVBITZ3JCWYDP27ICKBI55QKC6BIT2QNCVYDEK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:bennettfeelycom;&amp;encredirect=https%3A%2F%2Fslack.com%2Flp%3Fcvosrc%3Ddisplay.carbon.plain%20dev%26utm_source%3Dcarbon%26utm_medium%3Ddisplay%26utm_campaign%3Dplain%20dev%26c3ch%3DCarbon%20Networks%26c3nid%3DPlain%20Dev" class="carbon-img" target="_blank" rel="noopener"><img src="https://assets.servedby-buysellads.com/p/manage/asset/id/32052" alt="" border="0" height="100" width="130" style="max-width: 130px;"></a><a href="//srv.carbonads.net/ads/click/x/GTND42QECWSD6KQJCVS4YKQMCTBIP2QWCVBITZ3JCWYDP27ICKBI55QKC6BIT2QNCVYDEK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:bennettfeelycom;&amp;encredirect=https%3A%2F%2Fslack.com%2Flp%3Fcvosrc%3Ddisplay.carbon.plain%20dev%26utm_source%3Dcarbon%26utm_medium%3Ddisplay%26utm_campaign%3Dplain%20dev%26c3ch%3DCarbon%20Networks%26c3nid%3DPlain%20Dev" class="carbon-text" target="_blank" rel="noopener">All the tools your team needs in one place. Slack: Where work happens.</a></span><a href="http://carbonads.net/?utm_source=bennettfeelycom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank">ads via Carbon</a><img src="https://slack.sp1.convertro.com/view/vt/v1/slack/0/cvo.gif?cvosrc=display.carbon.plain dev&amp;utm_source=carbon&amp;utm_medium=display&amp;utm_campaign=plain dev" border="0" height="1" width="1" style="display: none;"><img src="https://569-img.c3tag.com/v.gif?cid=569&amp;c3ch=Carbon Networks&amp;c3nid=Plain Dev" border="0" height="1" width="1" style="display: none;"></span></div></div></div>';
-var carbon_ad = '<div class="item ad-box"><script type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=bennettfeelycom" id="_carbonads_js"></script></div>';
 var carbon_ad = '';
 
 
@@ -81,12 +80,20 @@ function getTweets() {
 		if (status == 200) {
 			var json = JSON.parse(this.response);
 
-			if (json.statuses.length > 0) {
-				// We have tweets
-				parseTweets(json);
+			console.log(json.errors);
+
+				console.log('b');
+
+			if (json.errors !== undefined) {
+				defaultTweets('Too busy!', 'We\'re really sorry, there\'s a lot of people visiting right now and we can\'t keep up. Please come back another time.');
 			} else {
-				// No one has tweeted
-				defaultTweets('Where is everyone?', 'Be the first to have your creature here! Send a tweet to @csscreatures!');
+				if (json.statuses.length > 0) {
+					// We have tweets
+					parseTweets(json);
+				} else {
+					// No one has tweeted
+					defaultTweets('Where is everyone?', 'Be the first to have your creature here! Send a tweet to @csscreatures!');
+				}
 			}
 		}
 
@@ -191,7 +198,7 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: 'hyper',
-			syn: 'animated|excited|happy|pumped|super'
+			syn: 'animated|excited|happy|pumped|super|smiley'
 		},
 		{
 			mod: 'jack-o-lantern',
@@ -227,7 +234,7 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: 'teeth',
-			syn: 'smile|smiling'
+			syn: 'smile|smiling|smiley'
 		},
 		{
 			mod: 'transparent',
@@ -301,6 +308,10 @@ function buildCreature(tweet, i) {
 				+ '<h3>' + prettyDate(tweet.created_at) + '</h3>'
 			+ '</div>'
 		+ '</div>';
+
+	// Add the creature to the page
+	console.log(document.querySelector('.ad-box').classList);
+	document.querySelector('.ad-box').classList.remove('is-hidden');
 
 	// Add the creature to the page
 	document.querySelector('.creatures').innerHTML += creature;
