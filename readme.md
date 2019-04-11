@@ -4,6 +4,8 @@
 
 This is a new version of CSS Creatures, which was originally released in December 2012.
 
+#### As of April 5th, 2019, this site is offline. If anyone wants to ressurect this cool project shoot me an email.
+
 ## How it works
 
 This project utilizes the Twitter Search API, showing tweets sent to the account @csscreatures. Tweets are parsed looking for colors and specific keywords, which are then used to build a creature.
