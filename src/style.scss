@@ -1,45 +1,44 @@
 // Partials ==========================================================================
-@import 'functions';
-@import 'extensions';
-@import 'reset';
-
+@import "functions";
+@import "extensions";
+@import "reset";
 
 // Variables =========================================================================
 $mobile: 30em;
 $tablet: 50em;
 $easing: ease-in-out;
 
-$purple : #181236;
-	$purple_dark : shade($purple, 40%);
-$brown : #3F1F13;
-$gold : #EDBF68;
-	$gold_light : tint($gold, 30%);
-	$gold_dark : rgba($gold, .5);
-$blue : #283377;
-	$blue_twitter : #1da1f2;
-	$blue_dark : shade($blue, 40%);
-$black : shade($blue, 85%);
-$white : #fafafa;
-	$shadow : rgba($purple_dark, .2);
-	$gray : mix($white, $black);
+$purple: #181236;
+$purple_dark: shade($purple, 40%);
+$brown: #3f1f13;
+$gold: #edbf68;
+$gold_lighter: tint($gold, 60%);
+$gold_light: tint($gold, 30%);
+$gold_dark: rgba($gold, 0.5);
+$blue_sky: #a3e9ff;
+$blue: #283377;
+$blue_twitter: #1da1f2;
+$blue_dark: shade($blue, 40%);
+$black: shade($blue, 85%);
+$white: #fafafa;
+$shadow: rgba($purple_dark, 0.2);
+$gray: mix($white, $black);
 
 $transition: 1s;
 $radius: 1rem;
 
-
 // Partials width variable access ====================================================
-@import 'keyframes';
-
+@import "keyframes";
 
 // Base Styles =======================================================================
 body {
 	position: relative;
-	background: $purple_dark;
-	background: linear-gradient($purple_dark, $purple);
-	color: $gold;
 	font: 400 100%/1.2 Amatic SC, sans-serif;
 	min-height: 100vh;
 	text-align: center;
+	background: $purple_dark;
+	background-image: linear-gradient($purple, $purple_dark);
+	color: $gold;
 
 	@media (min-width: $tablet) {
 		padding: 1em;
@@ -47,9 +46,13 @@ body {
 	}
 }
 
-
 // Typography ========================================================================
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-weight: normal;
 }
 
@@ -72,7 +75,7 @@ a {
 	@extend %no-drag;
 	text-decoration: none;
 	cursor: pointer;
-	color: $gold;
+	color: currentColor;
 	border-bottom: thin dashed $gold_dark;
 
 	&:hover {
@@ -81,14 +84,12 @@ a {
 	}
 }
 
-
 // Structural Styles =================================================================
 .container {
 	max-width: 70em;
 	margin: 0 auto;
 	padding: 1em;
 }
-
 
 // Header ============================================================================
 header {
@@ -104,7 +105,8 @@ header {
 	}
 }
 
-.logo, .directions-toggle {
+.logo,
+.directions-toggle {
 	@extend %no-select;
 	font-size: 1.5em;
 	cursor: pointer;
@@ -119,7 +121,8 @@ header {
 	margin-right: 1rem;
 	color: $gold;
 
-	&, &:hover {
+	&,
+	&:hover {
 		border: 0;
 	}
 
@@ -127,21 +130,20 @@ header {
 		font-size: 2em;
 	}
 
-
 	@media (min-width: $tablet) {
 		font-size: 3em;
 		line-height: 1;
 
-		.showing-directions & {
+		.is-showing-directions & {
 			transform-origin: top left;
-			transform: scale(.75);
+			transform: scale(0.75);
 		}
 	}
 }
 
-
 // Directions ==========================================================================
-.directions-toggle, .directions-box {
+.directions-toggle,
+.directions-box {
 	background: $blue;
 	color: $white;
 	border-radius: $radius;
@@ -149,12 +151,13 @@ header {
 
 .directions-toggle {
 	@extend %no-tap;
+	font-family: inherit;
 	display: inline-block;
 	position: relative;
 	cursor: pointer;
-	padding: 1rem .75em;
+	padding: 1rem 0.75em;
 	margin-bottom: 1rem;
-	box-shadow: inset .3rem -.3rem $shadow;
+	box-shadow: inset 0.3rem -0.3rem $shadow;
 
 	header & {
 		margin-bottom: 0;
@@ -164,72 +167,67 @@ header {
 		font-size: 1em;
 	}
 
-	.showing-directions header & {
+	.is-showing-directions header & {
 		border-radius: $radius $radius 0 0;
 		box-shadow: none;
 
 		&:after {
 			@extend %psuedo;
 			position: absolute;
-			width: $radius*2;
-			height: $radius*2;
+			width: $radius * 2;
+			height: $radius * 2;
 			background: transparent;
 			bottom: 0;
 			right: 100%;
 			border-radius: $radius;
 			box-shadow: $radius $radius $blue;
 		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.close {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: $radius $radius 0 0;
+	text-align: center;
+	vertical-align: middle;
+	background: rgba($blue, 0.9);
+	background: linear-gradient(90deg, rgba($blue, 0), $blue 66%);
+
+	path {
+		stroke: currentColor;
+		stroke-width: 1px;
+		stroke-linecap: round;
 	}
 
-	.showing-directions footer & {
-		box-shadow: inset 0 0 0 2px $blue;
-		background: transparent;
-	}
-
-	.close {
-		display: none;
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 100%;
-		border-radius: $radius $radius 0 0;
-		text-align: center;
-		vertical-align: middle;
-		background: rgba($blue, .9);
-		background: linear-gradient(90deg, rgba($blue, 0), $blue 66%);
-
+	&:hover {
 		path {
-			stroke: $gold;
-			stroke-width: 1px;
-			stroke-linecap: round;
+			// stroke: currentColor;
 		}
+	}
 
-		&:hover {
-			path {
-				stroke: $gold_light;
-			}
-		}
-
-		.showing-directions & {
-			display: inline-block;
-		}
+	.is-showing-directions & {
+		display: inline-block;
 	}
 }
 
 .directions-box {
 	display: none;
 	position: relative;
-	box-shadow: inset .3rem -.3rem $shadow;
+	box-shadow: inset 0.3rem -0.3rem $shadow;
 
-	h2, h3 {
-		margin: 0;
-	}
-
-	.showing-directions & {
+	.is-showing-directions & {
 		display: block;
 		border-radius: $radius 0 $radius $radius;
-		padding-bottom: .3rem;
+		padding-bottom: 0.3rem;
 
 		@media (min-width: $tablet) {
 			display: flex;
@@ -253,50 +251,65 @@ header {
 .example-tweet {
 	display: block;
 	position: relative;
-	padding: .5rem 1rem .5rem 1.75em;
+	padding: 0.5rem 1rem 0.5rem 1.75em;
 	vertical-align: middle;
 	background: $white;
 	font-size: 1.5em;
 	color: $black;
 	border: 0;
-	margin-top: .25em;
+	margin-top: 0.25em;
 	cursor: text;
 	border-radius: $radius;
 }
 
-.handle-highlight, .color-highlight, .more-highlight, .personality-highlight {
-	border-radius: .25em;
+.handle-highlight,
+.color-highlight,
+.more-highlight,
+.personality-highlight {
+	border-radius: 0.25em;
 	font-weight: bold;
-	box-shadow: -.1em 0 rgba($gold, 0), .1em 0 rgba($gold, 0);
+	box-shadow: -0.1em 0 rgba($gold_lighter, 0), 0.1em 0 rgba($gold_lighter, 0);
 }
 
-.showing-directions {
-	$highlight-duration : 12s;
+.is-showing-directions {
+	$highlight-duration: 12s;
 
-	.handle-highlight, .color-highlight, .more-highlight, .personality-highlight {
-		animation: highlight-light-on-dark $highlight-duration ease-in-out infinite;
+	.handle-highlight,
+	.color-highlight,
+	.more-highlight,
+	.personality-highlight {
+		animation: highlight-light-on-dark $highlight-duration ease-in-out
+			infinite;
 	}
 
 	.instructions {
-		.handle-highlight, .color-highlight, .more-highlight, .personality-highlight {
+		.handle-highlight,
+		.color-highlight,
+		.more-highlight,
+		.personality-highlight {
 			animation-name: highlight-dark-on-light;
 			color: $gold;
 		}
 	}
 
-	.color-highlight { animation-delay: $highlight-duration * .25; }
-	.personality-highlight { animation-delay: $highlight-duration * .5; }
-	.more-highlight { animation-delay: $highlight-duration * .75; }
+	.color-highlight {
+		animation-delay: $highlight-duration * 0.25;
+	}
+	.personality-highlight {
+		animation-delay: $highlight-duration * 0.5;
+	}
+	.more-highlight {
+		animation-delay: $highlight-duration * 0.75;
+	}
 }
-
 
 .twitter-logo {
 	width: 1.5em;
 	height: 1.5em;
 	vertical-align: middle;
 	position: absolute;
-	top: .125em;
-	left: .125em;
+	top: 0.125em;
+	left: 0.125em;
 
 	path {
 		fill: $blue_twitter;
@@ -307,14 +320,13 @@ header {
 	display: block;
 }
 
-
 // Creature structure ================================================================
-.creatures {
+.creatures-wrapper {
 	min-height: 25vh;
 	text-align: center;
 
-	.showing-directions & {
-		opacity: .25;
+	.is-showing-directions & {
+		opacity: 0.25;
 
 		a {
 			pointer-events: none;
@@ -322,9 +334,13 @@ header {
 	}
 }
 
+.creatures {
+	display: inline;
+}
+
 .item {
 	@extend %no-select;
-	animation: load .5s ease-out both;
+	animation: load 0.5s ease-out both;
 	display: inline-block;
 	width: 50%;
 	vertical-align: middle;
@@ -332,45 +348,40 @@ header {
 	padding: 1em;
 
 	// Animation delay
-	@for $i from 1 through 16 {
-		&:nth-child(#{$i}) {
-			animation-delay: $i*.15s;
-		}
-	}
+	// @for $i from 1 through 16 {
+	// 	&:nth-child(#{$i}) {
+	// 		animation-delay: $i * 0.15s;
+	// 	}
+	// }
 
 	// Media queries for sizing creatures
 	@for $i from 3 through 8 {
 		@media (min-width: 14em * $i) {
-			width: 100%/$i;
+			width: 100% / $i;
 		}
 	}
 
 	// Limit number of creatures for performance
-	@media (max-width: 14em * 3) {
-		&:nth-last-child(-n+4) {
-			display: none;
-		}
-	}
-	@media (min-width: 14em * 3) and (max-width: 14em * 4) {
-		&:nth-last-child(1) {
-			display: none;
-		}
-	}
-	@media (min-width: 14em * 4) and (max-width: 14em * 5) {
-		&:nth-last-child(-n+2) {
-			display: none;
-		}
-	}
-	@media (min-width: 14em * 5) and (max-width: 14em * 5) {
-		&:nth-last-child(-n+4) {
-			display: none;
-		}
-	}
-
-	&.ad-box,
-	&.default-box {
-		display: inline-block !important;
-	}
+	// @media (max-width: 14em * 3) {
+	// 	&:nth-last-child(-n + 4) {
+	// 		display: none;
+	// 	}
+	// }
+	// @media (min-width: 14em * 3) and (max-width: 14em * 4) {
+	// 	&:nth-last-child(1) {
+	// 		display: none;
+	// 	}
+	// }
+	// @media (min-width: 14em * 4) and (max-width: 14em * 5) {
+	// 	&:nth-last-child(-n + 2) {
+	// 		display: none;
+	// 	}
+	// }
+	// @media (min-width: 14em * 5) and (max-width: 14em * 5) {
+	// 	&:nth-last-child(-n + 4) {
+	// 		display: none;
+	// 	}
+	// }
 
 	&.is-hidden {
 		display: none !important;
@@ -397,8 +408,10 @@ header {
 	}
 }
 
-
 // Creature ==========================================================================
+$colors_list: #1e8fff, #d8a635, #5aa959, #3cb9b9, #5a31bb, #785cbb, #f44336,
+	#d8a635, #5aa959, #3cb9b9;
+
 .creature {
 	animation: wobble 3s ease-in-out infinite;
 	animation-delay: inherit;
@@ -408,27 +421,24 @@ header {
 	margin: 0 auto;
 	border-radius: 50%;
 	transform-origin: center bottom;
-	box-shadow: inset .3rem -.5rem $shadow;
+	box-shadow: inset 0.3rem -0.5rem $shadow;
 	transition: box-shadow $transition;
 
-	$colors_list: #f44336, #d8a635, #5aa959, #3cb9b9, #5a31bb, #785cbb, #f44336, #d8a635, #5aa959, #3cb9b9;
-
 	@for $i from 1 through length($colors_list) {
-		.creature-box:nth-last-child(#{$i}) & {
+		.creature-box:nth-child(#{$i}) & {
 			background-color: nth($colors_list, $i);
 		}
 	}
 
 	.creature-box:hover & {
-		box-shadow: inset .3rem -.75rem $shadow;
-		transition-duration: $transition*.25;
+		box-shadow: inset 0.3rem -0.75rem $shadow;
+		transition-duration: $transition * 0.25;
 	}
 
-	.showing-directions & {
+	.is-showing-directions & {
 		filter: grayscale(1);
 	}
 }
-
 
 // Face ------------------------------------------------------------------------------
 .face {
@@ -442,11 +452,10 @@ header {
 	transition: transform $transition;
 
 	.creature-box:hover & {
-		transform: translateY(-5%) scale(.95);
-		transition: transform $transition*.25;
+		transform: translateY(-5%) scale(0.95);
+		transition: transform $transition * 0.25;
 	}
 }
-
 
 // Eyes ------------------------------------------------------------------------------
 .eyes {
@@ -472,7 +481,6 @@ header {
 	}
 }
 
-
 // Moustache -------------------------------------------------------------------------
 .moustache {
 	position: absolute;
@@ -481,7 +489,6 @@ header {
 	width: 64%;
 	height: 14%;
 }
-
 
 // Mouth -----------------------------------------------------------------------------
 .mouth {
@@ -494,10 +501,10 @@ header {
 	border-radius: 20% 20% 50% 50%;
 	transform-origin: center top;
 	overflow: hidden;
-	transition: transform $transition*.25;
+	transition: transform $transition * 0.25;
 
 	.creature-box:hover & {
-		transform: scale3d(.95,.75,1);
+		transform: scale3d(0.95, 0.75, 1);
 	}
 }
 
@@ -516,7 +523,6 @@ header {
 		right: 32%;
 	}
 }
-
 
 // Modifiers =========================================================================
 .mod-angry {
@@ -549,7 +555,8 @@ header {
 }
 
 .mod-dark {
-	.mouth, .eye {
+	.mouth,
+	.eye {
 		background: #333;
 	}
 }
@@ -601,10 +608,13 @@ header {
 }
 
 .mod-jack-o-lantern {
-	.creature, .tooth {
+	.creature,
+	.tooth {
 		background: shade(darkorange, 50%) !important;
 	}
-	.mouth, .eye, .moustache path {
+	.mouth,
+	.eye,
+	.moustache path {
 		animation: jackolantern 4s ease-in-out infinite;
 		background: shade(gold, 25%);
 		fill: shade(gold, 25%);
@@ -641,6 +651,18 @@ header {
 	}
 }
 
+.mod-rainbow {
+	$colors: #be3caf, #fe4b83, #ff7747, #e3b62f, #b0ef5a, #53f666, #1edfa2,
+		#23acd8, #4c6fdc;
+
+	&:nth-of-type(odd) .creature {
+		background-image: linear-gradient(60deg, $colors);
+	}
+	&:nth-of-type(even) .creature {
+		background-image: linear-gradient(-120deg, $colors);
+	}
+}
+
 .mod-sad {
 	.mouth {
 		border-radius: 50% 50% 20% 20%;
@@ -655,7 +677,7 @@ header {
 		transform: rotate(45deg);
 	}
 	.eyes {
-		transform: scaleY(.5);
+		transform: scaleY(0.5);
 	}
 	.mouth {
 		animation: ghost 5s ease-in-out infinite;
@@ -676,7 +698,8 @@ header {
 }
 
 .mod-square {
-	.mouth, .eye {
+	.mouth,
+	.eye {
 		border-radius: 5px;
 	}
 	.creature {
@@ -709,7 +732,7 @@ header {
 
 .mod-nervous {
 	.mouth {
-		animation: nervous $transition*6 ease-in-out infinite;
+		animation: nervous $transition * 6 ease-in-out infinite;
 	}
 }
 
@@ -719,8 +742,8 @@ header {
 	}
 
 	&:hover .face {
-		transform: rotate(180deg) translateY(-5%) scale(.95);
-		transition: transform $transition*.25;
+		transform: rotate(180deg) translateY(-5%) scale(0.95);
+		transition: transform $transition * 0.25;
 	}
 }
 
@@ -730,13 +753,17 @@ header {
 	}
 }
 
-
 // Advertisment ======================================================================
 .ad-box {
 	display: inline-flex;
 	justify-content: center;
 	flex-direction: column;
 	padding: 1em;
+	animation: load 0.5s 0.45s ease-out paused both;
+
+	&.is-ready {
+		animation-play-state: running;
+	}
 
 	a {
 		border: 0;
@@ -758,12 +785,12 @@ header {
 	display: block;
 	font-size: 1.3em;
 	color: $white;
-	margin: .5em 0;
-	transition: color $transition*.5;
+	margin: 0.5em 0;
+	transition: color $transition * 0.5;
 
 	.ad-box:hover & {
 		color: $gold;
-		transition: color $transition*.25;
+		transition: color $transition * 0.25;
 	}
 }
 
@@ -772,55 +799,67 @@ header {
 	color: mix($white, $purple_dark);
 }
 
-
 // Footer ============================================================================
-	footer {
-		padding: 0 1em;
-	}
+footer {
+	padding: 0 1em;
+	text-align: center;
 
-
-// Share =============================================================================
-.share {
-	display: inline-block;
-	font-size: 1em;
-	margin-left: .5em;
+	// @media (min-width: $tablet) {
+	// 	text-align: left;
+	// }
 }
 
-
-.share-button {
-		@extend %no-select;
-		@extend %no-drag;
-		display: inline-block;
-		border-radius: $radius;
-		text-decoration: none;
-		box-shadow: $shadow;
-		color: $white;
-		padding: 1rem .7em;
-		background: $blue;
-		border: 0;
-		box-shadow: inset .15em -.15em $shadow;
-		transition:
-			background $transition,
-			color $transition;
+// Share =============================================================================
+.footer-split {
+	@media (min-width: $tablet) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
+}
 
-	.share-button {
-		position: relative;
-		cursor: pointer;
-		margin-right: .25em;
-		padding-left: 2em;
+.share-wrapper {
+	@media (min-width: $tablet) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-		.twitter-logo {
-			top: .525em;
-			left: .5em;
-
-			path {
-				fill: $blue_twitter;
-			}
-		}
-
-		&:hover {
-			color: white;
-			border: 0;
+		h2 {
+			margin: 0 0.5em 0 0;
 		}
 	}
+}
+
+.share {
+	display: inline-flex;
+	margin: 0 0.5em;
+	align-items: center;
+	vertical-align: top;
+}
+
+// .dark-mode-wrapper {
+// 	white-space: nowrap;
+
+// 	input {
+// 		display: none;
+// 	}
+// 	label {
+// 		display: inline-block;
+// 		opacity: 0.75;
+// 		border-bottom: thin dashed rgba($gold, 0.5);
+// 		margin-left: 0.25em;
+// 		cursor: pointer;
+// 		transition: opacity $transition;
+
+// 		&:hover {
+// 			border-style: solid;
+// 		}
+// 	}
+
+// 	input:checked + label {
+// 		font-weight: bold;
+// 		border-style: solid;
+// 		border-color: $gold;
+// 		opacity: 1;
+// 	}
+// }
