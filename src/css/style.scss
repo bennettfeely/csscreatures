@@ -278,8 +278,7 @@ header {
 	.color-highlight,
 	.more-highlight,
 	.personality-highlight {
-		animation: highlight-light-on-dark $highlight-duration ease-in-out
-			infinite;
+		animation: highlight-light-on-dark $highlight-duration ease-in-out infinite;
 	}
 
 	.instructions {

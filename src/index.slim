@@ -5,7 +5,7 @@ html lang="en"
 		meta charset="utf-8"
 		meta http-equiv="x-ua-compatible" content="ie=edge"
 		meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/ The Title
+		/ The title
 		title CSS Creatures
 		/ Android
 		meta name="theme-color" content="#283377"
@@ -15,10 +15,9 @@ html lang="en"
 		meta name="mobile-web-app-capable" content="yes"
 		/ Manifest
 		link rel="manifest" href="manifest.json"
-		link rel="license" href="license.txt"
 		/ Facebook
 		meta property="article:author" content="Bennett Feely"
-		meta property="og:description" content="See your own creature appear here by tweeting to @csscreatures!"
+		meta property="og:description" content="Send a tweet and create your own CSS Creature"
 		meta property="og:image" content="img/creatures.png"
 		meta property="og:locale" content="en_US"
 		meta property="og:site_name" content="CSS Creatures"
@@ -28,7 +27,7 @@ html lang="en"
 		/ Twitter
 		meta name="twitter:card" content="summary"
 		meta name="twitter:creator" content="@bennettfeely"
-		meta name="twitter:description" content="See your own creature appear here by tweeting to @csscreatures!"
+		meta name="twitter:description" content="Send a tweet and create your own CSS Creature"
 		meta name="twitter:image" content="img/creatures.png"
 		meta name="twitter:site" content="@csscreatures"
 		meta name="twitter:title" content="CSS Creatures"
@@ -38,10 +37,10 @@ html lang="en"
 		link href="img/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32"
 		link href="img/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16"
 		/ Styles
+		link rel="preconnect" href="https://fonts.gstatic.com"
 		link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet"
-		link href="style.min.css" rel="stylesheet"
+		link href="css/style.min.css" rel="stylesheet"
 		meta name="renderer" content="webkit"
-
 	body
 		header
 			.container
@@ -50,11 +49,11 @@ html lang="en"
 					button.directions-toggle onclick="toggleDirections()"
 						span Make your own
 						svg.close width="16" height="16" preserveAspectRatio="xMaxYMid" viewBox="0 0 16 16"
-							path d="M 5 5, L 11 11, M 11 5, L 5 11"
+							path d="M5 5L11 11M11 5L5 11"
 				.directions-box
 					.container
 						h2.instructions Create your CSS Creature by tweeting to <span class="handle-highlight">@csscreatures</span>. You can customize <span class="color-highlight">color</span>, <span class="personality-highlight">personality</span>, and <span class="more-highlight">more</span>!
-						h3 Or see a <a href="https://github.com/bennettfeely/bennett/tree/master/csscreatures#modifiers">complete list</a> of modifiers.
+						h3 Or see a <a href="https://github.com/bennettfeely/csscreatures#modifiers">complete list</a> of modifiers.
 					.examples
 						h3 Examples:
 						.example-tweet
@@ -97,4 +96,4 @@ html lang="en"
 						.share
 							<div id="fb-root"></div>
 							<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=247433128675302&autoLogAppEvents=1" nonce="rPd9gEHs"></script><div class="fb-like" data-href="https://bennettfeely.com/csscreatures" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
-	script src="src/creatures.js"
+	script src="js/creatures.min.js"

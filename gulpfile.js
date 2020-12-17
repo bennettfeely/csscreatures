@@ -1,29 +1,32 @@
-// Include plugins ===================================================================
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var autoprefixer = require("gulp-autoprefixer");
-var cssmin = require("gulp-cssmin");
+// Plugins =============================================================
+const gulp = require("gulp");
+const pump = require("pump");
+const rename = require("gulp-rename");
 
-var slim = require("gulp-slim");
-var replacer = require("gulp-batch-replace");
-var htmlmin = require("gulp-htmlmin");
-var injectfile = require("gulp-inject-file");
-var markdown = require("gulp-markdown");
+// Sync
+const browserSync = require("browser-sync");
 
-var pump = require("pump");
-var uglify = require("gulp-uglify");
+// HTML
+const slim = require("gulp-slim");
+const htmlmin = require("gulp-htmlmin");
 
-var rename = require("gulp-rename");
-var browserSync = require("browser-sync");
+// CSS
+const sass = require("gulp-sass");
+const autoprefixer = require("gulp-autoprefixer");
+const cssmin = require("gulp-cssmin");
 
-// Browser Sync ======================================================================
+// JS
+const terser = require("gulp-terser");
+const size = require("gulp-size");
+
+// Browser Sync ========================================================
 gulp.task("sync", function () {
   return browserSync({
     server: "",
   });
 });
 
-// Refresh ===========================================================
+// Refresh =============================================================
 gulp.task("refresh", function () {
   return gulp.src("*").pipe(
     browserSync.reload({
@@ -32,23 +35,7 @@ gulp.task("refresh", function () {
   );
 });
 
-// Compile Markdown ==================================================================
-gulp.task("markdown", function () {
-  return gulp
-    .src("src/*.md")
-    .pipe(markdown())
-    .pipe(rename("body.html"))
-    .pipe(gulp.dest(""));
-});
-
-// Compile HTML ======================================================================
-var attribute_fixer = [
-  ['autoplay="autoplay"', "autoplay"],
-  ['muted="muted"', "muted"],
-  ['async="async"', "async"],
-  ['loop="loop"', "loop"],
-];
-
+// Compile HTML ========================================================
 gulp.task("html", function () {
   return gulp
     .src("src/*.slim")
@@ -57,19 +44,12 @@ gulp.task("html", function () {
         pretty: true,
       })
     )
-    .pipe(replacer(attribute_fixer))
     .pipe(
       htmlmin({
         collapseWhitespace: true,
-        // collapseInlineTagWhitespace: true,
         removeComments: true,
         minifyCSS: true,
         minifyJS: true,
-      })
-    )
-    .pipe(
-      injectfile({
-        pattern: "<!--{\\s*inject:<filename>}-->",
       })
     )
     .pipe(gulp.dest(""))
@@ -80,17 +60,10 @@ gulp.task("html", function () {
     );
 });
 
-// JS ================================================================================
-gulp.task("js", function (cb) {
-  pump([gulp.src("src/*.js"), uglify(), gulp.dest("")], cb)
-    .pipe(rename("creatures.min.js"))
-    .pipe(gulp.dest(""));
-});
-
-// Compile CSS =======================================================================
+// Compile CSS =========================================================
 gulp.task("css", function () {
   return gulp
-    .src("src/*.scss")
+    .src("src/css/*.scss")
     .pipe(sass())
     .on("error", sass.logError)
     .pipe(
@@ -99,10 +72,14 @@ gulp.task("css", function () {
         cascade: false,
       })
     )
-    .pipe(rename("style.css"))
     .pipe(cssmin())
-    .pipe(rename("style.min.css"))
-    .pipe(gulp.dest(""))
+    .pipe(
+      rename(function (path) {
+        path.basename += ".min";
+        path.extname = ".css";
+      })
+    )
+    .pipe(gulp.dest("css"))
     .pipe(
       browserSync.reload({
         stream: true,
@@ -110,13 +87,36 @@ gulp.task("css", function () {
     );
 });
 
-// Watch Files For Changes ===========================================================
-gulp.task("watch", ["sync"], function () {
-  gulp.watch("src/*.md", ["markdown", "html"]);
-  gulp.watch("src/*.slim", ["html"]);
-  gulp.watch("src/*.js", ["js"]);
-  gulp.watch("src/*.scss", ["css"]);
+// JS ==================================================================
+gulp.task("js", function () {
+  return gulp
+    .src("src/js/*.js")
+    .pipe(terser())
+    .pipe(
+      rename(function (path) {
+        path.basename += ".min";
+        path.extname = ".js";
+      })
+    )
+    .pipe(gulp.dest("js"))
+    .pipe(
+      size({
+        showFiles: true,
+      })
+    )
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      })
+    );
 });
 
-// Default Task ======================================================================
+// Watch ===============================================================
+gulp.task("watch", ["sync"], function () {
+  gulp.watch("src/*.slim", ["html"]);
+  gulp.watch("src/js/*.js", ["js"]);
+  gulp.watch("src/css/*.scss", ["css"]);
+});
+
+// Default task ========================================================
 gulp.task("default", ["watch"]);

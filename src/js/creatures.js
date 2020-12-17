@@ -29,13 +29,11 @@ function prettyDate(time) {
 // Random animation delay and duration
 function randomAnimationTiming(target_seconds) {
 	var duration =
-		Math.floor(
-			(target_seconds / 2 + Math.random() * target_seconds) * 100
-		) / 100;
+		Math.floor((target_seconds / 2 + Math.random() * target_seconds) * 100) /
+		100;
 	var delay =
-		Math.floor(
-			(target_seconds / 2 + Math.random() * target_seconds) * 100
-		) / 100;
+		Math.floor((target_seconds / 2 + Math.random() * target_seconds) * 100) /
+		100;
 
 	return `animation-duration:${duration}s;animation-delay:-${delay}s`;
 }
@@ -260,8 +258,7 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: "transparent",
-			syn:
-				"checker|checkerboard|checkered|invisible|see-through|translucent",
+			syn: "checker|checkerboard|checkered|invisible|see-through|translucent",
 		},
 		{
 			mod: "tooth",
@@ -378,8 +375,7 @@ function autoPause() {
 	document.addEventListener("visibilitychange", function () {
 		if (document.hidden) {
 			// Pause all the animaions
-			auto_pause.innerHTML =
-				"* { animation-play-state: paused !important; }";
+			auto_pause.innerHTML = "* { animation-play-state: paused !important; }";
 		} else {
 			// Restart all the animations
 			setTimeout(function () {
