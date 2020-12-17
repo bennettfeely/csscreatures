@@ -56,7 +56,7 @@ function getColor(string) {
 	}
 
 	if (color !== undefined) {
-		return `background-color:${color};`;
+		return `background-color: ${color};`;
 	} else {
 		return ``;
 	}
@@ -218,7 +218,7 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: "jack-o-lantern",
-			syn: "halloween|pumpkin",
+			syn: "halloween|pumpkin|scary|spooky",
 		},
 		{
 			mod: "moustache",
@@ -258,7 +258,8 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: "transparent",
-			syn: "checker|checkerboard|checkered|invisible|see-through|translucent",
+			syn:
+				"checker|checkerboard|checkered|hidden|invisible|see-through|translucent",
 		},
 		{
 			mod: "tooth",
@@ -266,7 +267,7 @@ function buildCreature(tweet, i) {
 		},
 		{
 			mod: "upside-down",
-			syn: "backwards|upsidedown|rollover",
+			syn: "backwards|upsidedown|reverse|flip|flipped|rollover",
 		},
 		{
 			mod: "wink",
